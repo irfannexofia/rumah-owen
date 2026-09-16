@@ -51,7 +51,14 @@ export const areaData = [
   }
 ];
 
-export const developers = ["Sinar Mas Land", "Lippo Land", "Ciputra", "Summarecon", "Paramount Land", "Alam Sutera"];
+export const developers = [
+  { name: "Sinar Mas Land", logo: "/developers/sinar-mas-land.png" },
+  { name: "Lippo Land", logo: "/developers/lippo-land.webp" },
+  { name: "Ciputra", logo: "/developers/ciputra.webp" },
+  { name: "Summarecon", logo: "/developers/summarecon-agung.svg" },
+  { name: "Paramount Land", logo: "/developers/paramount-land.webp" },
+  { name: "Alam Sutera", logo: "/developers/alam-sutera.png" }
+];
 
 export const propertyPlaceholders = [
   {

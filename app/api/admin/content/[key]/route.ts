@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { isAuthenticated } from "@/lib/auth";
 import { deleteContentBlock, getContentBlock, updateContentBlock } from "@/lib/db";
 
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET(_: Request, { params }: { params: Promise<{ key: string }> }) {
@@ -41,3 +42,6 @@ export async function DELETE(_: Request, { params }: { params: Promise<{ key: st
   if (!changes) return NextResponse.json({ message: "Not found" }, { status: 404 });
   return NextResponse.json({ ok: true });
 }
+
+
+

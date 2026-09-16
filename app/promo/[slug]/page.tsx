@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PromoLanding } from "@/components/PromoLanding";
 import { defaultPromoContent } from "@/lib/promo-defaults";
 import { getPromoPage } from "@/lib/db";
 
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -32,3 +33,6 @@ export default async function PromoPage({ params }: { params: Promise<{ slug: st
 
   return <PromoLanding title={page.title} slug={page.slug} content={{ ...defaultPromoContent, ...page.content }} />;
 }
+
+
+

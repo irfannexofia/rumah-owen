@@ -1,6 +1,8 @@
 import Database from "better-sqlite3";
+import fs from "fs";
 import path from "path";
 import { defaultContent } from "@/lib/content-defaults";
+import { defaultPromoContent } from "@/lib/promo-defaults";
 import { getCached, invalidateCache, setCached } from "@/lib/cache";
 
 export type ContentBlock = {
@@ -41,13 +43,14 @@ type PromoRow = {
   updated_at: string;
 };
 
-const dbPath = process.env.DATABASE_PATH || "./data/content.sqlite";
+const dbPath = process.env.DATABASE_PATH || (process.env.VERCEL ? "/tmp/rumah-owen-content.sqlite" : "./data/content.sqlite");
 const resolvedDbPath = path.isAbsolute(dbPath) ? dbPath : path.join(process.cwd(), dbPath);
 
 let db: Database.Database | null = null;
 
 function getDb() {
   if (!db) {
+    fs.mkdirSync(path.dirname(resolvedDbPath), { recursive: true });
     db = new Database(resolvedDbPath);
     db.pragma("journal_mode = WAL");
     db.exec(`
@@ -71,6 +74,7 @@ function getDb() {
       );
     `);
     seedDefaults();
+    seedPromoDefaults();
   }
   return db;
 }
@@ -89,6 +93,61 @@ function seedDefaults() {
       title: key.replace(/-/g, " "),
       contentJson: JSON.stringify(content, null, 2)
     });
+  });
+}
+
+function seedPromoDefaults() {
+  const database = db;
+  if (!database) return;
+
+  const insert = database.prepare(`
+    INSERT OR IGNORE INTO promo_landing_pages (slug, title, is_published, content_json)
+    VALUES (@slug, @title, 1, @contentJson)
+  `);
+
+  insert.run({
+    slug: "rumah-model-1",
+    title: "Terravia Belova Classic",
+    contentJson: JSON.stringify({
+      ...defaultPromoContent,
+      headline: "Terravia Belova Classic",
+      heroImage: "/promo/terravia-belova-classic.png",
+      locationImage: "/promo/terravia-belova-classic.png",
+      priceLabel: "Harga",
+      priceNumber: "2.1",
+      priceSuffix: "Miliar",
+      promoLabel: "Cicilan",
+      promoNumber: "12",
+      promoSuffix: "jt-an/bulan"
+    }, null, 2)
+  });
+
+  insert.run({
+    slug: "rumah-model-2",
+    title: "Navapark Rumah Model 2",
+    contentJson: JSON.stringify({
+      ...defaultPromoContent,
+      headline: "Navapark Rumah Model 2",
+      subheadline: "Hunian premium Navapark dengan konsultasi langsung bersama Owen untuk cek promo, ketersediaan unit, dan jadwal kunjungan.",
+      location: "Navapark BSD",
+      developerText: "Developed by Sinar Mas Land",
+      developerLogo: "/promo/sinar-mas-land-logo.png",
+      heroImage: "/promo/navapark-botanic-villa.png",
+      locationImage: "/promo/navapark-botanic-villa.png",
+      priceLabel: "Harga",
+      priceNumber: "12",
+      priceSuffix: "Miliar",
+      promoLabel: "Cicilan",
+      promoNumber: "40",
+      promoSuffix: "jt-an/bulan",
+      unitTypes: [
+        {
+          name: "Navapark Rumah Model 2",
+          image: "/promo/navapark-botanic-villa.png",
+          description: "Harga, cicilan, spesifikasi, promo, dan availability wajib dikonfirmasi terlebih dahulu."
+        }
+      ]
+    }, null, 2)
   });
 }
 

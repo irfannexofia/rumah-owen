@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { isAuthenticated } from "@/lib/auth";
 import { createPromoPage, listPromoPages } from "@/lib/db";
 
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
@@ -34,3 +35,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Promo slug already exists or payload is invalid" }, { status: 400 });
   }
 }
+
+
+

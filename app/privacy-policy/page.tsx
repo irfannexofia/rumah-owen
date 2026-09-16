@@ -1,4 +1,4 @@
-export default function PrivacyPolicy() {
+﻿export default function PrivacyPolicy() {
   return (
     <main className="container-pad max-w-4xl py-16">
       <h1 className="font-serif text-5xl">Privacy Policy</h1>
@@ -7,3 +7,4 @@ export default function PrivacyPolicy() {
     </main>
   );
 }
+

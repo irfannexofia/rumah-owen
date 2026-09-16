@@ -1,4 +1,4 @@
-export default function Disclaimer() {
+﻿export default function Disclaimer() {
   return (
     <main className="container-pad max-w-4xl py-16">
       <h1 className="font-serif text-5xl">Disclaimer</h1>
@@ -6,3 +6,4 @@ export default function Disclaimer() {
     </main>
   );
 }
+

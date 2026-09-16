@@ -1,4 +1,4 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next";
 import { areaData, insights, propertyPlaceholders, site } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -14,3 +14,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...insights.map((post) => ({ url: `${site.domain}/insights/${post.slug}`, lastModified: new Date(post.date) }))
   ];
 }
+

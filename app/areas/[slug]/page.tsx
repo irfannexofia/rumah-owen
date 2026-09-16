@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const area = areaData.find((item) => item.slug === slug);
   if (!area) return {};
   return {
-    title: `Rumah ${area.name} — Konsultasi Properti dengan Owen`,
+    title: `Rumah ${area.name} â€” Konsultasi Properti dengan Owen`,
     description: `${area.summary} Konsultasikan pilihan rumah ${area.name} bersama Rumah_Owen.`,
     alternates: { canonical: `/areas/${area.slug}` }
   };
@@ -56,7 +56,7 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
       <section className="py-8">
         <h2 className="font-serif text-4xl">Featured listings</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {propertyPlaceholders.map((property) => <Link className="card p-5" href={`/properties/${property.slug}`} key={property.slug}>{property.title}<p className="mt-2 text-sm text-muted">{property.location} · Availability and pricing are subject to confirmation.</p></Link>)}
+          {propertyPlaceholders.map((property) => <Link className="card p-5" href={`/properties/${property.slug}`} key={property.slug}>{property.title}<p className="mt-2 text-sm text-muted">{property.location} Â· Availability and pricing are subject to confirmation.</p></Link>)}
         </div>
       </section>
       <section className="py-12">
@@ -68,3 +68,4 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
     </main>
   );
 }
+

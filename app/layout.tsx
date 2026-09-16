@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Inter, Newsreader } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/SiteChrome";
@@ -11,13 +11,13 @@ const newsreader = Newsreader({ subsets: ["latin"], variable: "--font-newsreader
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
   title: {
-    default: "Rumah_Owen — Property Consultant, Part of Terra Savana",
+    default: "Rumah_Owen â€” Property Consultant, Part of Terra Savana",
     template: "%s | Rumah_Owen"
   },
   description: site.description,
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Rumah_Owen — Property Consultant, Part of Terra Savana",
+    title: "Rumah_Owen â€” Property Consultant, Part of Terra Savana",
     description: site.description,
     url: site.domain,
     siteName: "Rumah_Owen",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rumah_Owen — Property Consultant",
+    title: "Rumah_Owen â€” Property Consultant",
     description: site.description
   }
 };
@@ -40,3 +40,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+

@@ -1,10 +1,11 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { AboutSection, AreasSection, DevelopersSection, FeaturedProperties, Hero, InsightsSection, MatchingSection, PropertySearch, TerraSavanaSection } from "@/components/Sections";
 import { realEstateAgentSchema } from "@/lib/schema";
 import { site } from "@/data/site";
 import { defaultContent } from "@/lib/content-defaults";
 import { getContent } from "@/lib/db";
 
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export default function Home() {
@@ -37,3 +38,6 @@ export default function Home() {
     </main>
   );
 }
+
+
+

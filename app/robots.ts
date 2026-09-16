@@ -1,4 +1,4 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next";
 import { site } from "@/data/site";
 
 export default function robots(): MetadataRoute.Robots {
@@ -10,3 +10,4 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: `${site.domain}/sitemap.xml`
   };
 }
+

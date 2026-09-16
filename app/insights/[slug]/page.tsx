@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -30,7 +30,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
       <article className="mx-auto max-w-4xl">
         <p className="eyebrow">Property Insights</p>
         <h1 className="mt-3 font-serif text-6xl tracking-[-0.04em]">{post.title}</h1>
-        <p className="mt-5 text-muted">By Owen · {post.date}</p>
+        <p className="mt-5 text-muted">By Owen Â· {post.date}</p>
         <div className="relative mt-10 h-[460px] overflow-hidden rounded-[2.5rem]">
           <Image fill src="https://images.unsplash.com/photo-1600607688960-e095ff83135c?auto=format&fit=crop&w=1500&q=80" alt={post.title} className="object-cover" />
         </div>
@@ -57,3 +57,4 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
     </main>
   );
 }
+

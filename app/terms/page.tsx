@@ -1,4 +1,4 @@
-export default function Terms() {
+﻿export default function Terms() {
   return (
     <main className="container-pad max-w-4xl py-16">
       <h1 className="font-serif text-5xl">Terms & Conditions</h1>
@@ -6,3 +6,4 @@ export default function Terms() {
     </main>
   );
 }
+

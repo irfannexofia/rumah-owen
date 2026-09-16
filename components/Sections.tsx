@@ -107,8 +107,8 @@ export function DevelopersSection() {
       <p className="mt-4 max-w-3xl text-muted">Developer portfolio handled by Owen. This section does not imply official partnership, exclusive agency status, or corporate affiliation unless verified.</p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {developers.map((developer) => (
-          <div key={developer.name} className="flex h-32 items-center justify-center rounded-3xl border border-line bg-white/70 p-6 shadow-soft">
-            <Image src={developer.logo} alt={`${developer.name} logo`} width={260} height={90} className="max-h-16 w-auto max-w-full object-contain" />
+          <div key={developer.name} className="flex h-36 items-center justify-center rounded-3xl border border-line bg-white/70 px-10 py-8 shadow-soft">
+            <Image src={developer.logo} alt={`${developer.name} logo`} width={260} height={110} className="h-16 w-full object-contain" />
           </div>
         ))}
       </div>

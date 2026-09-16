@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  background: #f7f3ec;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f7f3ec;
+  color: #171716;
+}
+
+::selection {
+  background: #344235;
+  color: #f7f3ec;
+}
+
+.container-pad {
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+}
+
+.eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.28em] text-olive;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-full bg-olive px-6 py-3 text-sm font-semibold text-white transition hover:bg-ink;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-full border border-ink/15 bg-white/50 px-6 py-3 text-sm font-semibold text-ink transition hover:border-olive hover:text-olive;
+}
+
+.card {
+  @apply rounded-[2rem] border border-line bg-white/55 shadow-soft backdrop-blur;
+}

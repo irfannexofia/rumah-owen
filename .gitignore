@@ -1,0 +1,16 @@
+node_modules
+.next
+out
+dist
+
+.env
+.env*.local
+
+data/*.sqlite
+data/*.sqlite-*
+
+tmp-*
+*.log
+
+.DS_Store
+Thumbs.db

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { nav, site } from "@/data/site";
 import { trackEvent } from "@/lib/tracking";
@@ -9,16 +10,20 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-xl">
-      <div className="container-pad flex h-20 items-center justify-between gap-6">
-        <Link href="/" className="leading-none">
-          <div className="text-lg font-semibold tracking-[0.18em]">{site.wordmark}</div>
-          <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
-            Property Consultant · Part of Terra Savana
-          </div>
+      <div className="container-pad flex h-24 items-center justify-between gap-6 py-2">
+        <Link href="/" aria-label={site.name} className="flex items-center transition-transform hover:opacity-90">
+          <Image
+            src={site.logo}
+            alt={site.name}
+            width={240}
+            height={80}
+            priority
+            className="h-16 md:h-18 w-auto object-contain"
+          />
         </Link>
         <nav className="hidden items-center gap-6 text-sm text-muted lg:flex">
           {nav.map((item) => (
-            <Link key={item.href} href={item.href} className="transition hover:text-ink">
+            <Link key={`${item.href}-${item.label}`} href={item.href} className="transition hover:text-ink">
               {item.label}
             </Link>
           ))}

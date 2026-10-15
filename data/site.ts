@@ -1,18 +1,23 @@
+import { commercialProperties, PropertyItem } from "./commercial";
+import { residentialHouses } from "./residential";
+import { catalogProperties } from "./catalog-import";
+
 export const site = {
   name: "Rumah_Owen",
   wordmark: "RUMAH_OWEN",
+  logo: "/logo/rumah-owen-logo.png",
   domain: "https://rumah-owen.com",
   tagline: "Property Consultant · Part of Terra Savana",
   description:
-    "Rumah_Owen adalah personal property brand Owen, property consultant yang membantu pembeli menemukan rumah di Gading Serpong, BSD, Alam Sutera, dan Karawaci.",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "6280000000000",
+    "Rumah_Owen adalah personal property brand Owen, property consultant yang membantu pembeli menemukan rumah (1M-20M+), ruko (2M-5M), studio loft, business loft, dan kavling komersial di Gading Serpong, BSD, Alam Sutera, dan Karawaci.",
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "6288214397464",
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "#",
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@rumah-owen.com"
 };
 
 export const nav = [
   { label: "Home", href: "/" },
-  { label: "Properties", href: "/#properties" },
+  { label: "Katalog Properti", href: "/#properties" },
   { label: "Property Matching", href: "/#matching" },
   { label: "Areas", href: "/#areas" },
   { label: "Developers", href: "/#developers" },
@@ -25,29 +30,29 @@ export const areaData = [
     slug: "gading-serpong",
     name: "Gading Serpong",
     image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80",
-    summary: "Kawasan residensial matang dengan pilihan rumah keluarga, cluster, dan akses fasilitas perkotaan.",
-    characteristics: "Cluster modern, rumah keluarga, lingkungan aktif, pilihan primary dan secondary."
+    summary: "Kawasan residensial & komersial matang dengan pilihan ruko ramai, studio loft, dan hunian keluarga berkelas.",
+    characteristics: "Cluster modern, ruko kuliner ramai, hunian sultan Matera, pilihan primary dan secondary."
   },
   {
     slug: "bsd",
     name: "BSD",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80",
-    summary: "Area kota mandiri dengan banyak pilihan proyek baru, hunian keluarga, dan fasilitas urban.",
-    characteristics: "New project, township living, rumah premium, pilihan investasi jangka panjang."
+    image: "/properties/bsd/eonna-elyon-8-frontal.jpg",
+    summary: "Kota mandiri terlengkap dengan proyek rumah baru inovatif, business loft premium, dan kavling komersial CBD.",
+    characteristics: "Township living, NavaPark botanic estate, Eonna Korean villa, ruko modern boulevard."
   },
   {
     slug: "alam-sutera",
     name: "Alam Sutera",
     image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1400&q=80",
-    summary: "Lingkungan residensial terencana dengan karakter tenang, rapi, dan nyaman untuk keluarga.",
-    characteristics: "Hunian established, cluster eksklusif, secondary property, lingkungan hijau."
+    summary: "Lingkungan hijau asri dengan cluster mansion mewah Gramercy, gedung kantor The Domain, dan akses tol langsung.",
+    characteristics: "Hunian established, The Gramercy, cluster eksklusif, green tunnel, lingkungan tenang."
   },
   {
     slug: "karawaci",
     name: "Karawaci",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80",
-    summary: "Kawasan hunian dengan ekosistem fasilitas lengkap dan pilihan rumah di berbagai segmen.",
-    characteristics: "Rumah keluarga, akses fasilitas, pilihan secondary, area residensial mapan."
+    summary: "Ekosistem mapan Lippo Karawaci dan township baru Park Serpong dengan pilihan ruko dan rumah terjangkau.",
+    characteristics: "Rumah keluarga, Park Serpong, akses fasilitas lengkap, pilihan investasi strategis."
   }
 ];
 
@@ -60,65 +65,39 @@ export const developers = [
   { name: "Alam Sutera", logo: "/developers/alam-sutera.png" }
 ];
 
-export const propertyPlaceholders = [
-  {
-    slug: "modern-2-storey-house-placeholder",
-    title: "Modern 2-Storey House",
-    location: "Gading Serpong",
-    price: "Rp2.8 M",
-    landSize: "LT 90 m²",
-    buildingSize: "LB 120 m²",
-    bedrooms: "4 Bedrooms",
-    bathrooms: "3 Bathrooms",
-    type: "Secondary Property",
-    developer: "Developer/project information to be confirmed",
-    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=80"
-  },
-  {
-    slug: "bsd-new-project-placeholder",
-    title: "New Project Family Home",
-    location: "BSD",
-    price: "Price on confirmation",
-    landSize: "Land size to be confirmed",
-    buildingSize: "Building size to be confirmed",
-    bedrooms: "3+ Bedrooms",
-    bathrooms: "2+ Bathrooms",
-    type: "New Project",
-    developer: "Selected developer project",
-    image: "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=1400&q=80"
-  },
-  {
-    slug: "alam-sutera-residence-placeholder",
-    title: "Established Cluster Residence",
-    location: "Alam Sutera",
-    price: "Subject to confirmation",
-    landSize: "LT placeholder",
-    buildingSize: "LB placeholder",
-    bedrooms: "4 Bedrooms",
-    bathrooms: "3 Bathrooms",
-    type: "Secondary Property",
-    developer: "Not applicable / to be confirmed",
-    image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1400&q=80"
-  }
+// Deduplikasi: hapus entry placeholder lama untuk cluster yang sudah di-cover detail dari file CSV
+const supersededTitles = ["Izzi", "Vireya", "Castillo", "Eonna", "Eonna Grand Mansion"];
+const cleanedResidentialHouses = residentialHouses.filter(
+  (house) => !supersededTitles.includes(house.title)
+);
+
+// Gabungan listing: data detail CSV diutamakan di depan + listing residensial lainnya + komersial
+export const propertyPlaceholders: PropertyItem[] = [
+  ...catalogProperties,
+  ...cleanedResidentialHouses,
+  ...commercialProperties
 ];
+
+export { commercialProperties, residentialHouses, catalogProperties };
+export type { PropertyItem };
 
 export const insights = [
   {
-    slug: "rumah-rp2-miliar-di-gading-serpong",
-    title: "Rumah Rp2 Miliar di Gading Serpong: Apa Saja Pilihannya?",
-    description: "Panduan awal memahami pilihan rumah di Gading Serpong pada kisaran budget Rp2 miliar.",
-    date: "2026-09-16"
+    slug: "investasi-ruko-gading-serpong-dan-bsd",
+    title: "Peluang Emas Investasi Ruko di Koridor Gading Serpong & BSD City",
+    description: "Kupas tuntas potensi yield sewa dan capital gain ruko 2M - 5M hingga studio loft komersial.",
+    date: "2026-09-24"
   },
   {
-    slug: "bsd-vs-gading-serpong",
-    title: "BSD vs Gading Serpong: Memahami Karakter Masing-Masing Area",
-    description: "Perbandingan karakter area untuk membantu menentukan lokasi hunian yang sesuai kebutuhan.",
-    date: "2026-09-16"
+    slug: "kavling-komersial-tangerang-pilihan-terbaik",
+    title: "Panduan Memilih Kavling Komersial Siap Bangun di Tangerang",
+    description: "Perbandingan harga permeter kavling komersial Paramount, Summarecon, Sinar Mas, Lippo, dan CGS.",
+    date: "2026-09-24"
   },
   {
-    slug: "panduan-memilih-rumah-untuk-keluarga-di-tangerang",
-    title: "Panduan Memilih Rumah untuk Keluarga di Tangerang",
-    description: "Faktor yang perlu dipertimbangkan sebelum memilih rumah untuk keluarga.",
-    date: "2026-09-16"
+    slug: "panduan-memilih-rumah-keluarga-dan-sultan",
+    title: "Panduan Memilih Rumah Idaman di Tangerang: Dari 1M Hingga Hunian Mewah 20M+",
+    description: "Rekomendasi cluster terbaik mulai dari milenial home (1-2M), family cluster (3-4M), luxury resort (5-7M), hingga mansion sultan (9-20M+).",
+    date: "2026-09-24"
   }
 ];

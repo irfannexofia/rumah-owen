@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { site } from "@/data/site";
 import { trackEvent } from "@/lib/tracking";
+import { PromoLeadForm } from "@/components/LeadForms";
 
 type PromoContent = {
   logoText?: string;
@@ -32,22 +33,10 @@ type PromoContent = {
   disclaimer?: string;
 };
 
-const inputClass = "w-full rounded-2xl border border-line bg-white/80 px-4 py-3 text-sm text-ink outline-none focus:border-olive";
-
 export function PromoLanding({ title, slug, content }: { title: string; slug: string; content: PromoContent }) {
-  const [submitted, setSubmitted] = useState(false);
-  const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(content.whatsappMessage || `Hi Owen, saya mau tanya promo ${title}.`)}`;
-
   useEffect(() => {
     trackEvent("ViewContent", { content_type: "promo_landing", slug, title });
   }, [slug, title]);
-
-  function submitLead(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    trackEvent("FormSubmit", { form: "promo_brochure", slug });
-    trackEvent("Lead", { source: "promo_landing", slug });
-    setSubmitted(true);
-  }
 
   return (
     <main className="bg-paper font-sans text-ink">
@@ -58,8 +47,8 @@ export function PromoLanding({ title, slug, content }: { title: string; slug: st
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative mx-auto grid min-h-[760px] max-w-6xl gap-8 px-5 py-8 md:grid-cols-[1fr_390px] md:px-8">
           <div>
-            <div className="inline-flex rounded-full bg-paper px-5 py-3 text-sm font-semibold tracking-[0.18em] text-olive">
-              {content.logoText || "RUMAH_OWEN"}
+            <div className="rounded-2xl bg-paper/95 px-4 py-2 shadow-soft">
+              <Image src={site.logo} alt={site.name} width={240} height={80} priority className="h-12 w-auto object-contain" />
             </div>
             <div className="mt-16 max-w-2xl">
               {content.developerLogo ? (
@@ -96,31 +85,9 @@ export function PromoLanding({ title, slug, content }: { title: string; slug: st
           </div>
 
           <div className="self-center rounded-[2rem] border border-line bg-paper p-6 text-ink shadow-soft">
-            <h2 className="font-serif text-3xl text-olive">Ambil Brosur, Promo, & Info Rumah</h2>
-            <p className="mt-2 text-sm leading-6 text-muted">Isi form singkat ini. Owen akan menghubungi Anda via WhatsApp.</p>
-            {submitted ? (
-              <div className="mt-5 rounded-2xl bg-white/80 p-5 text-sm font-semibold text-olive">Terima kasih. Owen akan review kebutuhan Anda dan menghubungi via WhatsApp.</div>
-            ) : (
-              <form onSubmit={submitLead} className="mt-5 space-y-3">
-                <input className={inputClass} required placeholder="Name" />
-                <input className={inputClass} required placeholder="No. WhatsApp (+62812345678)" />
-                <input className={inputClass} placeholder="Email" type="email" />
-                <input className={inputClass} placeholder="Kota Domisili" />
-                <button className="w-full rounded-full bg-olive px-5 py-4 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-ink">
-                  {content.primaryCta || "Ambil Brosur Rumah"}
-                </button>
-              </form>
-            )}
-            <a
-              href={whatsappUrl}
-              onClick={() => {
-                trackEvent("WhatsAppClick", { placement: "promo_form", slug });
-                trackEvent("Lead", { source: "promo_whatsapp", slug });
-              }}
-              className="mt-3 flex w-full items-center justify-center rounded-full border border-olive px-5 py-4 text-sm font-semibold uppercase tracking-wide text-olive transition hover:bg-olive hover:text-white"
-            >
-              Chat WhatsApp Sekarang
-            </a>
+            <h2 className="font-serif text-3xl text-olive">Dapatkan Brosur, Promo &amp; Info Properti</h2>
+            <p className="mt-2 text-sm leading-6 text-muted">Isi data singkat agar Owen dapat merekomendasikan properti yang sesuai dengan kebutuhan dan anggaran Anda.</p>
+            <div className="mt-5"><PromoLeadForm source={slug} /></div>
             <p className="mt-4 text-xs leading-5 text-muted">{content.disclaimer}</p>
           </div>
         </div>
@@ -215,15 +182,8 @@ export function PromoLanding({ title, slug, content }: { title: string; slug: st
 
       <section className="bg-olive px-5 py-16 text-center text-white">
         <h2 className="mx-auto max-w-3xl font-serif text-5xl leading-tight">Siap cek promo dan jadwalkan kunjungan?</h2>
-        <p className="mx-auto mt-4 max-w-2xl text-white/75">Chat Owen untuk konfirmasi harga, promo, ketersediaan unit, dan opsi rumah lain yang sesuai kebutuhan Anda.</p>
-        <a href={whatsappUrl} onClick={() => trackEvent("WhatsAppClick", { placement: "promo_final", slug })} className="mt-8 inline-flex rounded-full bg-paper px-8 py-4 text-sm font-semibold uppercase tracking-wide text-olive">
-          Chat Owen di WhatsApp
-        </a>
+        <p className="mx-auto mt-4 max-w-2xl text-white/75">Isi form di atas untuk mendapatkan info properti yang sesuai kebutuhan Anda.</p>
       </section>
-
-      <a href={whatsappUrl} onClick={() => trackEvent("WhatsAppClick", { placement: "promo_sticky_mobile", slug })} className="fixed bottom-4 left-4 right-4 z-50 rounded-full bg-olive px-5 py-4 text-center text-sm font-semibold uppercase tracking-wide text-white shadow-2xl md:hidden">
-        Chat WhatsApp Owen
-      </a>
     </main>
   );
 }

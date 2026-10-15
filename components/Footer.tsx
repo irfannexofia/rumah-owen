@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/data/site";
 
@@ -6,8 +7,16 @@ export function Footer() {
     <footer className="border-t border-line bg-ink text-paper">
       <div className="container-pad grid gap-10 py-14 md:grid-cols-[1.5fr_1fr_1fr]">
         <div>
-          <div className="text-xl font-semibold tracking-[0.18em]">{site.wordmark}</div>
-          <p className="mt-3 max-w-md text-sm text-paper/70">
+          <Link href="/" aria-label={site.name} className="inline-block transition-transform hover:opacity-90">
+            <Image
+              src={site.logo}
+              alt={site.name}
+              width={220}
+              height={80}
+              className="h-16 md:h-20 w-auto object-contain"
+            />
+          </Link>
+          <p className="mt-4 max-w-md text-sm text-paper/70">
             Property Consultant · Part of Terra Savana. Gading Serpong · BSD · Alam Sutera · Karawaci.
           </p>
         </div>

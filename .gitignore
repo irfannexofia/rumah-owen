@@ -16,3 +16,5 @@ tmp-*
 Thumbs.db
 
 .next-stale*
+
+public/**/*.pdf
